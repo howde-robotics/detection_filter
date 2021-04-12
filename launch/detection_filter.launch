@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="detection_filter" type="detection_filter" name="detection_filter">
+    </node>
+</launch>
