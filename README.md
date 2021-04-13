@@ -4,7 +4,7 @@ Node to filter raw human detection locations with the Wire package
 # How to try new object pose/filter algorithms on bag
 Here is how the human detection pipeline currently works:
 
-![asd](filtered_rosbag.svg)
+![asd](graphic.svg)
 
 Use this command to filter the new bag
 
