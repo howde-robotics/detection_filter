@@ -29,8 +29,20 @@ rosbag filter April12_SVD_test_human_detection_tf_off.bag April12_Filtered.bag "
 ```
 
 ## Running downstream nodes locally
-1. Pull our repos for `rgb_human_detection_node`, `detection_filter`, `wire` and `visualizer` into you `catkin_ws/src/`. If you havent already installed jsk for the visualizer then: `sudo apt-get install ros-melodic-jsk-visualization`. There might be other dependencies just hmu if you run into issues building these nodes. `wire` is gonna throw a fuck ton of warnings when you build about some highly problematic `Cube`, idk what they are but don't worry about them.
+1. Pull our repos for `darkenet_ros_msgs` (see last section for only pulling this), `RealSenseDev` (which includes `rgb_human_detection_node`), `detection_filter`, `wire` and `visualizer` into you `catkin_ws/src/`. If you havent already installed jsk for the visualizer then: `sudo apt-get install ros-melodic-jsk-visualization`. There might be other dependencies just hmu if you run into issues building these nodes. `wire` is gonna throw a fuck ton of warnings when you build about some highly problematic `Cube`, idk what they are but don't worry about them.
 2. For the love of god download terminator because you're about the have like 30 terminals open
 
 
+## Just getting `darknet_ros_msgs`
+If you just want the messages and not having to pull the whole darknet repo with all the weights and shit:
+
+```bash
+cd catkin_ws/src/
+mkdir darknet_ros
+cd darknet_ros
+git init
+git remote add origin https://github.com/howde-robotics/darknet_ros.git
+git fetch
+git checkout origin/master darknet_ros_msgs/*
+```
 
