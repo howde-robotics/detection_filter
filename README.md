@@ -32,14 +32,8 @@ rosbag filter April12_SVD_test_human_detection_tf_off.bag April12_Filtered.bag "
 1. Pull our repos for `darkenet_ros_msgs` (see last section for cloning only `msgs` without the rest), `RealSenseDev` (which includes `rgb_human_detection_node`), `detection_filter`, `wire` and `visualizer` into you `catkin_ws/src/`. If you havent already installed jsk for the visualizer then: `sudo apt-get install ros-melodic-jsk-visualization`. There might be other dependencies just hmu if you run into issues building these nodes. `wire` is gonna throw a fuck ton of warnings when you build about some highly problematic `Cube`, idk what they are but don't worry about them.
 2. The `rgb_human_detection_node` requires pyrealsense2 libraries. `pip install pyrealsense2`
 3. `catkin_make` duh
-4. For the love of god download terminator because you're about the have like 30 terminals open. could I put this in a single launch file? yes. Did I? no.
-5. terminal 1: `roscore`
-6. terminal 2: `rosparam set use_sim_time true`
-7. terminal 3: `roslaunch rgb_human_detection_node rgb_human_detection_node.launch`
-8. terminal 4: `roslaunch detection_filter detection_filter.launch`
-9. terminal 5: `roslaunch wire_core start.launch`
-10. terminal 6: `roslaunch visualizer visualizer.launch`
-11. terminal 7: `rosbag play April12_Filtered.bag --clock April12_Filtered.bag`
+4. `roslaunch dragoon_bringup detection_testing.launch` This launches `rgb_human_detection_node`, `detection_filter`, `wire_core`, and `visualizer`
+5. `rosbag play <FILTERED_BAGFILE>.bag --clock <FILTERED_BAGFILE>.bag`
 
 There you have it. Happy bug hunting
 
