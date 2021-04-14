@@ -30,7 +30,7 @@ rosbag filter April12_SVD_test_human_detection_tf_off.bag April12_Filtered.bag "
 
 ## Running downstream nodes locally
 1. Pull our repos for `darkenet_ros_msgs` (see last section for cloning only `msgs` without the rest), `RealSenseDev` (which includes `rgb_human_detection_node`), `detection_filter`, `wire` and `visualizer` into you `catkin_ws/src/`. If you havent already installed jsk for the visualizer then: `sudo apt-get install ros-melodic-jsk-visualization`. There might be other dependencies just hmu if you run into issues building these nodes. `wire` is gonna throw a fuck ton of warnings when you build about some highly problematic `Cube`, idk what they are but don't worry about them.
-2. The `rgb_human_detection_node` requires pyrealsense2 libraries. Since the AGX required those be compiled from source, the `.so` is present in the `RealSenseDev/src` folder. This will probably not work with your machine unless you're running armV8 architecture. So you need download pyrelasense2 on your own `pip install pyrealsense2` and move/delete those `.so` files so they don't conflict. **DO NOT COMMIT THAT DELETION TO THE GITHUB GOD PLEASE**. There is a better way of managing this and I'll fix it later but for now we will do it this way because we hate ourselves. 
+2. The `rgb_human_detection_node` requires pyrealsense2 libraries. `pip install pyrealsense2`
 3. `catkin_make` duh
 4. For the love of god download terminator because you're about the have like 30 terminals open. could I put this in a single launch file? yes. Did I? no.
 5. terminal 1: `roscore`
