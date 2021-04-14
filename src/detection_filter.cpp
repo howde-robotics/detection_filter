@@ -32,7 +32,7 @@ class detection_filter {
     
 public:
 
-    detection_filter() : tfListener_(tfBuffer_), detectionMaxThresh_(8), detectionMinThresh_(0.05)
+    detection_filter() : tfListener_(tfBuffer_), detectionMaxThresh_(15), detectionMinThresh_(0.05)
     {
         human_det_sub_ = nh_.subscribe("/ObjectPoses", 5, &detection_filter::objectPosesCB, this);
         evidence_pub_ = nh_.advertise<wire_msgs::WorldEvidence>("/world_evidence", 10, true);
