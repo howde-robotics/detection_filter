@@ -24,16 +24,20 @@
 class detection_filter {
     tf2_ros::Buffer tfBuffer_;
     tf2_ros::TransformListener tfListener_;
-    ros::NodeHandle nh_;
+    ros::NodeHandle nh_, private_nh_;
     ros::Subscriber human_det_sub_;
     ros::Publisher evidence_pub_;
     double detectionMaxThresh_;
     double detectionMinThresh_;
+    double probabilityMinThresh_;
     
 public:
 
-    detection_filter() : tfListener_(tfBuffer_), detectionMaxThresh_(15), detectionMinThresh_(0.05)
+    detection_filter() : tfListener_(tfBuffer_), private_nh_("~")
     {
+        private_nh_.param<double>("detectionMaxThresh_", detectionMaxThresh_, 15);  // m
+        private_nh_.param<double>("detectionMinThresh_", detectionMinThresh_, 0.05); // m
+        private_nh_.param<double>("probabilityMinThresh_", probabilityMinThresh_, 0.4); // percentage
         human_det_sub_ = nh_.subscribe("/ObjectPoses", 5, &detection_filter::objectPosesCB, this);
         evidence_pub_ = nh_.advertise<wire_msgs::WorldEvidence>("/world_evidence", 10, true);
     }
@@ -41,7 +45,7 @@ public:
     void objectPosesCB(const dragoon_messages::ObjectsConstPtr& msg) 
     {
         for (auto obj : msg->objects_info) {
-            if (obj.Class == "person") {
+            if (obj.Class == "person" && obj.probability > probabilityMinThresh_) {
                 //Preprocess distances
                 double distSq = pow(obj.pose.x, 2.0) + pow(obj.pose.y, 2.0) + pow(obj.pose.z, 2.0);
                 if (distSq > pow(detectionMaxThresh_, 2) || distSq < pow(detectionMinThresh_, 2)) {
